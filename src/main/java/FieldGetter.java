@@ -2,6 +2,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 class FieldGetter {
@@ -43,5 +44,15 @@ class FieldGetter {
                 .map(Field::getName)
                 .collect(Collectors.toList())
                 .toArray(new String[]{});
+    }
+
+    /**
+     * Get value for a given public field or null if the field does not exist or is not accessible.
+     */
+
+    public Object getFieldValue(Object object, String fieldName) throws IllegalAccessException {
+        Optional<Field> field = Arrays.stream(object.getClass().getFields()).filter(f -> f.getName().equals(fieldName))
+                .findFirst();
+        return field.isPresent() ? field.get().get(object) : null;
     }
 }
