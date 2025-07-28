@@ -6,4 +6,8 @@ class ArrayUtils {
         Collections.reverse(Arrays.asList(array));
         return array;
     }
+
+    public static void printTheThirdRow(int[][] twoDimArray) {
+        System.out.println(Arrays.toString(twoDimArray[2]).replaceAll("[,\\]\\[]", ""));
+    }
 }
